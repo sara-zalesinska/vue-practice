@@ -118,8 +118,16 @@ const isFormValid = computed(() => {
   return Boolean(!Object.keys(errors.value).length)
 })
 
-const validateField = (event) => {
-  console.log(event);
+const validateField = (inputName) => {
+  console.log(inputName);
+  if(!review.value[inputName]) {
+    errors.value = {
+      ...errors.value, 
+      [inputName]: 'This field is required'
+    }
+  } else {
+    delete errors.value[inputName]
+  }
 }
 
 </script>
@@ -173,19 +181,19 @@ const validateField = (event) => {
     <h3>Leave a review</h3>
     <div class="form-group">
       <label for="name">Name:</label>
-      <input id="name" v-model="review.name" :class="{ 'form-input-error': errors.name }">
+      <input id="name" v-model="review.name" :class="{ 'form-input-error': errors.name }" @blur="validateField('name')">
       <p class="form-error" v-if="errors.name"> {{ errors.name }}</p>
     </div>
 
     <div class="form-group">
       <label for="review">Review:</label>      
-      <textarea id="review" v-model="review.review" :class="{ 'form-input-error': errors.review }"></textarea>
+      <textarea id="review" v-model="review.review" :class="{ 'form-input-error': errors.review }" @blur="validateField('review')"></textarea>
       <p class="form-error" v-if="errors.review"> {{ errors.review }}</p>
     </div>
 
     <div class="form-group">
       <label for="rating">Rating:</label>
-      <select id="rating" v-model.number="review.rating" :class="{ 'form-input-error': errors.rating }">
+      <select id="rating" v-model.number="review.rating" :class="{ 'form-input-error': errors.rating }" @blur="validateField('rating')">
         <option>5</option>
         <option>4</option>
         <option>3</option>
