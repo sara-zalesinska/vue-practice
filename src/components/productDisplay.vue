@@ -1,17 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 // defineProps({
 //   msg: String,
 // })
-
-
 </script>
 
-<template>
+<template></template>
 
-</template>
-
-<style scoped>
-
-</style>
+<style scoped></style>
