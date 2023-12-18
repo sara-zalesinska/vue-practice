@@ -1,20 +1,28 @@
 <template>
   <div class="product">
-    <div class="product-img">
-      <img :src="selectedVariant?.image" alt="" />
+    <div class="product__image-container">
+      <img class="product__image" :src="selectedVariant?.image" alt="" />
     </div>
     <div class="product-info">
-      <h1>{{ title }}</h1>
-      <p v-if="inStock">In Stock</p>
-      <p v-else>Out of Stock</p>
-      <p v-if="product.premium">Free</p>
-      <p v-else>$2.99</p>
-      <p>{{ product.description }}</p>
-      <ul class="ingredients">
-        <li v-for="detail in product.details" :key="detail">{{ detail }}</li>
+      <h1 class="product-info__heading">{{ title }}</h1>
+      <p v-if="inStock" class="product-info__stock">In Stock</p>
+      <p v-else class="product-info__stock">Out of Stock</p>
+      <p v-if="product.premium" class="product-info__price">Free</p>
+      <p v-else class="product-info__price">$2.99</p>
+      <p class="product-info__description">{{ product.description }}</p>
+      <ul class="product-info__ingredients-list">
+        <li
+          v-for="detail in product.details"
+          :key="detail"
+          class="product-info__ingredients-list-element"
+        >
+          {{ detail }}
+        </li>
       </ul>
-      <ul class="sizes">
-        <li v-for="size in product.sizes" :key="size">{{ size }}</li>
+      <ul class="product-info__sizes-list">
+        <li v-for="size in product.sizes" :key="size" class="product-info__sizes-list-element">
+          {{ size }}
+        </li>
       </ul>
       <div class="product-variants-container">
         <div
@@ -25,7 +33,7 @@
           @mouseover="setVariant(variant)"
         ></div>
       </div>
-      <button class="add-to-cart" type="button" @click="addToCart">Add to Cart</button>
+      <button class="product__add-to-cart-btn" type="button" @click="addToCart">Add to Cart</button>
     </div>
   </div>
 </template>
@@ -40,7 +48,6 @@ const props = defineProps({
     default: () => {},
   },
 });
-
 const selectedVariant = ref();
 
 const title = computed(() => `${props.product.brand} ${props.product.productName}`);
@@ -60,57 +67,67 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-li {
-  list-style: none;
-}
-h1 {
-  margin: 0;
-  color: white;
-  text-align: left;
-}
-p {
-  color: white;
-  text-align: left;
-}
-
-.product-img img {
-  width: 80%;
-}
 .product {
   display: flex;
   justify-content: space-between;
   margin-top: 140px;
-}
-.sizes {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 50px;
-}
-.ingredients {
-  text-align-last: left;
-}
-.sizes li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 70px;
-  height: 40px;
-  padding: 5px;
-  border: 1px solid whitesmoke;
-  border-radius: 5px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: border-color 0.25s;
 
-  &:hover {
-    border-color: #646cff;
+  &__image {
+    width: 80%;
+  }
+
+  &__add-to-cart-btn {
+    margin-top: 25px;
+    width: 100%;
   }
 }
-.ingredients li {
-  list-style: circle;
-}
 
+.product-info {
+  &__heading {
+    margin: 0;
+    color: white;
+    text-align: left;
+  }
+  &__stock,
+  &__price,
+  &__description {
+    color: white;
+    text-align: left;
+  }
+
+  &__ingredients-list {
+    text-align-last: left;
+  }
+
+  &__ingredients-list-element {
+    list-style: circle;
+  }
+
+  &__sizes-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 50px;
+  }
+
+  &__sizes-list-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 40px;
+    padding: 5px;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: border-color 0.25s;
+
+    &:hover {
+      border-color: #646cff;
+    }
+  }
+}
 .product-variants-container {
   display: flex;
   justify-content: flex-start;
