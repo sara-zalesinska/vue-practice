@@ -8,7 +8,7 @@
       <p v-if="inStock" class="product-info__stock">In Stock</p>
       <p v-else class="product-info__stock">Out of Stock</p>
       <p v-if="product.premium" class="product-info__price">Free</p>
-      <p v-else class="product-info__price">$2.99</p>
+      <p v-else class="product-info__price">{{ product.price }}</p>
       <p class="product-info__description">{{ product.description }}</p>
       <ul class="product-info__ingredients-list">
         <li
@@ -40,6 +40,9 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { useCartStore } from '@/stores/useCartStore';
+
+const cartStore = useCartStore();
 
 const props = defineProps({
   product: {
@@ -58,7 +61,7 @@ const setVariant = (variant) => {
 };
 
 const addToCart = () => {
-  // cart.value.push(selectedVariant.value.id);
+  cartStore.addToCart(props.product);
 };
 
 onMounted(() => {

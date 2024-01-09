@@ -12,6 +12,7 @@ const product = ref({
   productName: 'socks',
   image: new URL('./assets/images/socks_blue.jpg', import.meta.url).href,
   premium: false,
+  price: 3.99,
   color: 'green',
   selectedVariant: 0,
   description:
