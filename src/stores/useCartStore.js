@@ -3,19 +3,22 @@ import { ref, computed } from 'vue';
 
 const useCartStore = defineStore('cart', () => {
   const products = ref([]);
-
   const numberOfProducts = computed(() => products.value.length);
-  const totalPrice = computed(() =>
-    // let sum = 0;
-    // products.value.forEach((product) => {
-    //   sum = product.price + sum;
-    // });
-    // return sum;
 
-    products.value.reduce((sum, product) => sum + product.price, 0)
+  const totalPrice = computed(() =>
+    products.value.reduce((sum, product) => sum + product.price * product.quantity, 0).toFixed(2)
   );
+
   const addToCart = (product) => {
-    products.value.push(product);
+    const hasDuplicate = products.value.some((cartProduct) => product.id === cartProduct.id);
+
+    if (hasDuplicate) {
+      const localProduct = products.value.find((cartProduct) => product.id === cartProduct.id);
+      localProduct.quantity += 1;
+      return;
+    }
+
+    products.value.push({ ...product, quantity: 1 });
   };
 
   const removeFromCart = (product) => {

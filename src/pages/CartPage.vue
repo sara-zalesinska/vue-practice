@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <div class="product-table">
     <table class="cart">
@@ -14,36 +12,41 @@
           <td>Quantity</td>
           <td>Price</td>
         </tr>
-        <tr class="cart__subheading">
-          <td class="product-name">Socks Green</td>
-          <td class="product-quantity">2</td>
-          <td class="product-price">$3.98</td>
+
+        <tr v-for="product in products" :key="product.id" class="cart__subheading">
+          <td class="product-name">{{ product.productName }}</td>
+          <td class="product-quantity">{{ product.quantity }}</td>
+          <td class="product-price">{{ product.price }} </td>
         </tr>
-        <tr class="cart__subheading">
-          <td class="product-name">Socks Blue</td>
-          <td class="product-quantity">1</td>
-          <td class="product-price">$1.99</td>
-        </tr>
-        <tr class="cart__subheading">
-          <td class="product-name">Socks Green</td>
-          <td class="product-quantity">2</td>
-          <td class="product-price">$3.98</td>
-        </tr>
-        <tr class="cart__subheading cart__sum-up">
+        <tr class="cart__subheading cart__sumed-up">
           <td>Total:</td>
           <td></td>
-          <td>$10.22</td>
+          <td class="cart__total-price">{{ totalPrice }}</td>
         </tr>
       </tbody>
     </table>
+    <!-- <div class="" v-for="product in products" :key="product.id">
+      {{ product.productName }}
+    </div> -->
   </div>
 </template>
 
+<script setup>
+import { computed } from 'vue';
+import { useCartStore } from '@/stores/useCartStore';
+
+const cartStore = useCartStore();
+
+const products = computed(() => cartStore.products);
+const totalPrice = computed(() => cartStore.totalPrice);
+</script>
+
 <style lang="scss" scoped>
 .product-table {
-  width: 100vw;
+  width: 90vw;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 table {
   border: 1px solid whitesmoke;
@@ -78,7 +81,7 @@ thead {
     background-color: #646cff !important;
   }
 
-  &__sum-up {
+  &__sumed-up {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     font-weight: bold;

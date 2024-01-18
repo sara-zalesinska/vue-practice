@@ -61,7 +61,7 @@ const setVariant = (variant) => {
 };
 
 const addToCart = () => {
-  cartStore.addToCart(props.product);
+  cartStore.addToCart({ ...props.product, variantId: selectedVariant.value.id });
 };
 
 onMounted(() => {

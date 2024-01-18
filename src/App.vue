@@ -4,7 +4,7 @@
       <div class="wrapper">
         <nav>
           <router-link :to="{ name: 'Home' }">Home</router-link> |
-          <router-link :to="{ name: 'ProductDetails' }">Products</router-link> |
+          <!-- <router-link :to="{ name: 'ProductDetails' }">Products</router-link> | -->
           <router-link :to="{ name: 'Cart' }">
             Cart <span v-if="cartLength > 0" class="app-badge">{{ cartLength }}</span>
           </router-link>

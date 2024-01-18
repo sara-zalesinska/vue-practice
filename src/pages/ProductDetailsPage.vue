@@ -13,8 +13,9 @@ const product = ref({
   image: new URL('./assets/images/socks_blue.jpg', import.meta.url).href,
   premium: false,
   price: 3.99,
-  color: 'green',
+  // color: 'green',
   selectedVariant: 0,
+  id: 'prodiuct-1',
   description:
     'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis sostrud exercitation ullamco laboris nisi.',
   details: ['30% wool', '50% cotton', '20% polyester'],
