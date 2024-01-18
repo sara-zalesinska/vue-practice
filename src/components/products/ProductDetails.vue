@@ -33,7 +33,7 @@
           @mouseover="setVariant(variant)"
         ></div>
       </div>
-      <button class="product__add-to-cart-btn" type="button" @click="addToCart">Add to Cart</button>
+      <app-button class="product__add-to-cart-btn" @click="addToCart">Add to Cart</app-button>
     </div>
   </div>
 </template>
@@ -41,6 +41,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useCartStore } from '@/stores/useCartStore';
+import AppButton from '../app/AppButton.vue';
 
 const cartStore = useCartStore();
 
