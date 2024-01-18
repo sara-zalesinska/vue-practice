@@ -33,7 +33,8 @@
           @blur="validateField('rating')"
         />
       </div>
-      <button class="review-form__submit-btn" type="submit">Submit</button>
+      <!-- <button class="review-form__submit-btn" type="submit">Submit</button> -->
+      <app-button class="review-form__form-btn" native-type="submit">Submit</app-button>
     </form>
   </section>
 </template>
@@ -43,6 +44,7 @@ import { ref, computed } from 'vue';
 import AppInput from '../app/AppInput.vue';
 import AppTextarea from '../app/AppTextarea.vue';
 import AppSelect from '../app/AppSelect.vue';
+import AppButton from '../app/AppButton.vue';
 
 const emit = defineEmits(['add-review']);
 
@@ -139,14 +141,8 @@ const validateField = (inputName) => {
     font-size: 1.8em;
   }
 
-  &__submit-btn {
-    margin-top: 40px;
-    border-color: grey;
-    transition: all 0.3s;
-    &:hover {
-      border-color: #646cff;
-    }
+  &__form-btn {
+    margin-top: 30px;
   }
 }
-
 </style>
