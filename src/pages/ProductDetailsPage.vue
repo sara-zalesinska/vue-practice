@@ -1,39 +1,20 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import ProductReviewsForm from '../components/products/ProductReviewsForm.vue';
 import ProductReviewsList from '../components/products/ProductReviewsList.vue';
 import ProductDetails from '../components/products/ProductDetails.vue';
+import { products } from '../mocks/products';
 
-// const cart = ref([]);
 const reviewsList = ref([]);
+const route = useRoute();
+const productId = computed(() => route.params.id);
 
-const product = ref({
-  brand: 'Vue',
-  productName: 'socks',
-  image: new URL('./assets/images/socks_blue.jpg', import.meta.url).href,
-  premium: false,
-  price: 3.99,
-  // color: 'green',
-  selectedVariant: 0,
-  id: 'prodiuct-1',
-  description:
-    'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis sostrud exercitation ullamco laboris nisi.',
-  details: ['30% wool', '50% cotton', '20% polyester'],
-  variants: [
-    {
-      id: 3838,
-      color: 'blue',
-      image: new URL('@/assets/images/socks_blue.jpg', import.meta.url).href,
-      quantity: 0,
-    },
-    {
-      id: 2929,
-      color: 'green',
-      image: new URL('@/assets/images/socks_green.jpg', import.meta.url).href,
-      quantity: 50,
-    },
-  ],
-  sizes: ['36-39', '39-42', '42-45'],
+const product = ref();
+
+onMounted(() => {
+  product.value = products.find((localProduct) => localProduct.id === productId.value);
+  console.log(products, productId.value);
 });
 
 const addReview = (newReview) => {
@@ -42,12 +23,11 @@ const addReview = (newReview) => {
 </script>
 
 <template>
-  <!-- <div class="top">
-    <a class="cart" href="">\_/ CART {{ cart.length }}</a>
-  </div> -->
-  <product-details :product="product" />
-  <product-reviews-list :reviews="reviewsList" />
-  <product-reviews-form @add-review="addReview($event)" />
+  <div class="test" v-if="product">
+    <product-details :product="product" />
+    <product-reviews-list :reviews="reviewsList" />
+    <product-reviews-form @add-review="addReview($event)" />
+  </div>
 </template>
 
 <style scoped>

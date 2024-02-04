@@ -33,7 +33,6 @@
           @blur="validateField('rating')"
         />
       </div>
-      <!-- <button class="review-form__submit-btn" type="submit">Submit</button> -->
       <app-button class="review-form__form-btn" native-type="submit">Submit</app-button>
     </form>
   </section>
