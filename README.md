@@ -1,5 +1,7 @@
 # Vue.js Composition API Project
 
+### Live version: https://shop-page-with-vue.netlify.app/#/
+
 ## Overview
 Welcome to my **Vue.js Composition API** project! This project is focused on building an interactive and dynamic online shopping page. It leverages the Vue.js Composition API for efficient state management, providing a solid foundation for a responsive and user-friendly interface.
 
