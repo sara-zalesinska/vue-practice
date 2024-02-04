@@ -26,5 +26,6 @@ The project is structured to include the following main pages:
 In the near future, I plan to implement the following features:
 - **User Page**: Introducing a user profile page.
 - **User Authentication**: Enabling user account creation, login, and registration functionality.
+- **Unit tests**: Proactively working towards integrating unit tests.
 
 Feel free to explore the different aspects of this project, and your contributions are always welcome!
